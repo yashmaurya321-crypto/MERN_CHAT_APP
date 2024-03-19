@@ -3,10 +3,9 @@
 This project is a practice project for a chat application using Socket.IO, where users can find each other, send connection requests, and exchange messages.
 
 
-## Images
-<img src="images/Screenshot (13).png" alt="Homepage" width="400"> 
+<img src="[https://raw.githubusercontent.com/username/repository-name/branch-name/image/Screenshot (13).png](https://github.com/yashmaurya321-crypto/MERN_CHAT_APP)" width="400" height="300" alt="Project Screenshot">
 
-## Technologies Used
+##Technologies Used
 
 - **Backend**: Node.js, Express.js, MongoDB, Socket.IO
 - **Frontend**: React.js, React Router, Axios, Socket.IO Client
