@@ -6,7 +6,8 @@ This project is a practice project for a chat application using Socket.IO, where
 <img src="/image/Screenshot (13).png" width="400" height="300" alt="Project Screenshot">                 <img src="/image/Screenshot (14).png" width="400" height="300" alt="Project Screenshot">
 
 <img src="/image/Screenshot (15).png" width="400" height="300" alt="Project Screenshot">                 <img src="/image/Screenshot (17).png" width="400" height="300" alt="Project Screenshot">
-##Technologies Used
+
+## Technologies Used
 
 - **Backend**: Node.js, Express.js, MongoDB, Socket.IO
 - **Frontend**: React.js, React Router, Axios, Socket.IO Client
