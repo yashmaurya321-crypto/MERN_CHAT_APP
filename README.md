@@ -3,7 +3,7 @@
 This project is a practice project for a chat application using Socket.IO, where users can find each other, send connection requests, and exchange messages.
 
 
-<img src="[https://raw.githubusercontent.com/username/repository-name/branch-name/image/Screenshot (13).png](https://github.com/yashmaurya321-crypto/MERN_CHAT_APP)" width="400" height="300" alt="Project Screenshot">
+<img src="/image/Screenshot (13).png" width="400" height="300" alt="Project Screenshot">
 
 ##Technologies Used
 
