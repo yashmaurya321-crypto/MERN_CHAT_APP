@@ -2,6 +2,10 @@
 
 This project is a practice project for a chat application using Socket.IO, where users can find each other, send connection requests, and exchange messages.
 
+
+## Images
+<img src="images/Screenshot (13).png" alt="Homepage" width="400"> 
+
 ## Technologies Used
 
 - **Backend**: Node.js, Express.js, MongoDB, Socket.IO
@@ -51,6 +55,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
