@@ -94,15 +94,15 @@ app.post('/conversation', async (req, res) => {
   try {
     const { senderId, receiverId } = req.body;
     
-    // Log receiverId to check if it's received correctly
+    
     console.log('ReceiverId:', receiverId);
 
-    // Check if receiverId is a valid ObjectId
+    
     if (!mongoose.Types.ObjectId.isValid(receiverId)) {
       return res.status(400).json({ error: 'Invalid receiverId' });
     }
 
-    // Temporarily comment out the code related to creating conversation and updating user
+   
     const newConv = await new conversation({ members: [senderId, receiverId] });
     await newConv.save();
 
@@ -126,17 +126,17 @@ app.post('/requests', async (req, res) => {
   try {
     const {id} = req.body
 
-    // Find user by ID
+    
     const user = await User.findById(id);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Access the request array
+   
     const requestArray = user.request;
 
-    // Send the request array as a response
+    
     res.status(200).json({ requestArray });
   } catch (err) {
     console.error(err);
@@ -147,7 +147,7 @@ app.post('/request', async (req, res) => {
   try {
     const { email, userId } = req.body;
 
-    // Find user by email
+    
     const userByEmail = await User.findOne({ email });
 
     if (!userByEmail) {
@@ -161,11 +161,11 @@ app.post('/request', async (req, res) => {
       return res.status(404).json({ message: "User not found by userId" });
     }
 
-    // Add user found by userId to the request array of the user found by email
+    
     userByEmail.request.push(userById);
     await userByEmail.save();
 
-    // Send response with success message and updated user request array
+  
     res.status(200).json({ message: "Request added successfully", userRequest: userByEmail.request });
   } catch (err) {
     console.error(err);
@@ -179,13 +179,13 @@ app.get('/conversation/:senderId', async (req, res) => {
   try {
     const senderId = req.params.senderId;
 
-    // Find all conversations where the sender is a member
+    
     const conversations = await conversation.find({ members: senderId });
     if (!conversations || conversations.length === 0) {
       return res.status(404).json({ error: "Conversations not found for the sender" });
     }
 
-    // Extract receiver IDs from each conversation
+
     const receiverDetails = conversations.map(conv => {
       const receiverId = conv.members.find(memberId => memberId.toString() !== senderId.toString());
       return {
@@ -197,14 +197,12 @@ app.get('/conversation/:senderId', async (req, res) => {
       return res.status(404).json({ error: "Receivers not found for the sender's conversations" });
     }
 
-    // Fetch receiver details from the User collection
+  
     const receiverPromises = receiverDetails.map(receiver => User.findById(receiver.receiverId));
     const receivers = await Promise.all(receiverPromises);
     if (!receivers || receivers.length === 0) {
       return res.status(404).json({ error: "Receivers not found in User collection" });
     }
-    
-    // Return the list of receivers along with conversation IDs
     res.status(200).json({ receivers: receivers, conversations: receiverDetails });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -231,7 +229,7 @@ app.post('/messege', async (req, res) => {
       return res.status(200).send("Message sent successfully");
     }
 
-    // If conversationID is provided, just save the message
+  
     const newMessage = new Message({
       conversationID,
       sender,
@@ -276,30 +274,29 @@ let users = []
 io.on('connect', (socket) => {
   console.log('user connected ', socket.id);
    
-  // Add user to the list
+ 
   socket.on('adduser', (userID) => {
     const user = { userID, socketId: socket.id };
     users.push(user);
-    // Emit only the newly added user to all clients
+  
     console.log(users)
     io.emit('user_connected', user);
     
-    // Emit the updated user list to all clients
+
     io.emit('getuser', users);
   });
 
 
-  // Handle message sending
+ 
   socket.on('send', ({ sender,  receiver ,message}) => {
     console.log("Received message via socket:", {  sender,  receiver ,message });
     io.to()
-    // Handle the message (e.g., save to database)
+   
   });
 
-  // Handle disconnection
   socket.on('disconnect', () => {
     console.log('User disconnected : ', socket.id);
-    // Remove the disconnected user from the list
+  
     users = users.filter((user) => user.socketId !== socket.id);
     io.emit('getuser', users);
   });
