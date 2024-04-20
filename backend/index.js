@@ -27,25 +27,25 @@ app.post('/register', async (req, res) => {
   try {
       const { name, email, password } = req.body;
 
-      // Check if any required field is missing
+    
       if (!name || !email || !password) {
           return res.status(400).json({ error: "Please fill all the fields" });
       }
 
-      // Create a new user instance
+   
       const newUser = new User({ name, email, password });
 
-      // Save the new user to the database
+   
       await newUser.save();
 
       console.log('User registration successful');
       res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
-      // Check if the error is a MongoDB duplicate key error for the email field
+     
       if (error.code === 11000 && error.keyPattern && error.keyPattern.email) {
           return res.status(400).json({ error: 'Email is already registered' });
       } else {
-          // Handle other types of errors
+          
           console.error('Error during user registration:', error);
           res.status(500).json({ error: 'Internal Server Error' });
       }
@@ -56,20 +56,19 @@ app.post('/login', async (req, res) => {
   try {
       const { email, password } = req.body;
 
-      // Check if both email and password are provided
       if (!email || !password) {
           return res.status(400).json({ error: "Please provide both email and password" });
       }
 
-      // Find the user in the database
+     
       const user = await User.findOne({ email });
 
-      // If no user is found with the provided email, return error
+   
       if (!user) {
           return res.status(400).json({ error: "Invalid email or password" });
       }
 
-      // Check if the provided password matches the user's password
+     
       
       if (password != user.password){
         return res.status(400).json({ error: "Invalid email or password" });
@@ -79,7 +78,7 @@ app.post('/login', async (req, res) => {
 
       const token = jwt.sign({ id: user._id, email: user.email }, secret_key, { expiresIn: "1h" });
 
-      // Update user document with token
+   
       user.token = token;
       await user.save();
 
